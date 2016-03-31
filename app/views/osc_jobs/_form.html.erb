@@ -7,7 +7,7 @@
     <select class="form-control selectpicker" id="new_job_template_selectpicker">
       <option disabled selected value> -- select a template -- </option>
       <% @templates.each do |template| %>
-          <option value="<%= template.to_json %>"><%= template.name %> -- <%= template.notes || template.path %></option>
+          <option value="<%= template.path %>"><%= template.name %> -- <%= template.notes %></option>
       <% end %>
     </select>
   </div>
