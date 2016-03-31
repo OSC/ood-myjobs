@@ -2,6 +2,10 @@ class Template
   attr_accessor :path
   delegate :name, :notes, :host, :script_path, to: :manifest
 
+  def self.all
+    Source.my.templates.concat(Source.osc.templates)
+  end
+
   def initialize(path)
     @path = Pathname.new(path)
   end

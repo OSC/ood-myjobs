@@ -17,18 +17,19 @@ class OscJobsController < ApplicationController
   # GET /osc_jobs/new
   def new
     @osc_job = OscJob.new
-    @templates = Source.osc.templates
-    # @templates = Template.all.concat(Template.new.system_templates)
+    @templates = Template.all
   end
 
   # GET /osc_jobs/1/edit
   def edit
-    @templates = Template.all.concat(Template.new.system_templates)
+    @templates = Template.all
   end
 
   # POST /osc_jobs
   # POST /osc_jobs.json
   def create
+    # FIXME: web form should create OscJob from params[:path] and optional
+    # values like custom script name, host, etc
     @osc_job = OscJob.new(osc_job_params)
     @osc_job.staged_dir = @osc_job.stage.to_s
     new_script_path = Pathname.new(@osc_job.staged_dir).join(@osc_job.staged_script_name).to_s
