@@ -9,11 +9,14 @@ class Source
   def self.osc
     Source.new("OSC's Templates", "/nfs/01/wiag/PZS0645/ood/jobconstructor/templates")
   end
-  # def self.mine
-  #   Source.new("My Templates", )
-  # end
+
+  def self.my
+    Source.new("My Templates", AwesimRails.dataroot.join("templates").to_s)
+  end
 
   def templates
+    return [] unless Pathname.new(path).directory?
+
     folders = Dir.entries(path)
     # Remove "." and ".."
     folders.shift(2)
