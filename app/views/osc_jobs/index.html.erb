@@ -50,7 +50,7 @@
                   <td data-sort="<%= osc_job.id %>"><small><%= osc_job.created_at.strftime('%F %T') %></small></td>
                   <td><strong><%= osc_job.name %></strong></td>
                   <td><%= osc_job.pbsid %></td>
-                  <td><%= osc_job.batch_host.titleize %></td>
+                  <td><%= osc_job.batch_host.titleize if osc_job.batch_host %></td>
                   <td id="status_label_<%= osc_job.id %>"><%= status_label(osc_job) %></td>
                   <!-- FILE_SIZE_FEATURE
                     <td><%# number_to_human_size(Filesystem.new.path_size(osc_job.staged_dir)) %></td>
@@ -71,7 +71,7 @@
         <p>Submit to:</p>
           <select class="form-control" id="job-details-server-select" disabled>
             <% Servers.each do |s| %>
-                <option id="<%= s.first %>" value="<%= s.first %>"><%= s.first.titleize %></option>
+                <option id="<%= s.first %>" value="<%= s.first %>"><%= s.first.titleize if s.first %></option>
             <% end %>
           </select>
       </div>
