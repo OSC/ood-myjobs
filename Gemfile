@@ -53,7 +53,11 @@ gem "paperclip", "~> 4.2.2"
 gem "jquery-datatables-rails", "~> 3.3.0"
 gem "js-routes", "~> 1.2.4"
 gem "rails_12factor", group: :production
-gem 'pbs', '~> 1.1'
-gem 'osc-machete', '~> 1.1'
-gem 'osc_machete_rails', '~> 1.2'
-gem 'ood_appkit', '~> 0.2'
+gem 'pbs', '~> 2.0'
+gem 'osc-machete', git: 'https://github.com/OSC/osc-machete.git'
+gem 'osc_machete_rails', git: 'https://github.com/OSC/osc_machete_rails.git', branch: 'osc-machete-v2'
+gem 'ood_appkit', git: 'https://github.com/OSC/ood_appkit.git', branch: 'global-config'
+
+# temporary for now
+gem 'ood_cluster', git: 'https://github.com/OSC/ood_cluster.git'
+gem 'ood_reservations', git: 'https://github.com/OSC/ood_reservations.git'
