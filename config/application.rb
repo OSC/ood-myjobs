@@ -20,6 +20,7 @@ module JobConstructor
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # Add Bower component location to the Rails asset path.
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
   end
 end
