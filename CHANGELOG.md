@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
   helper functions for scripts.
   [#241](https://github.com/OSC/ood-myjobs/pull/241)
 
+### Removed
+
+- Removed `therubyracer` gem requirement in favor of `nodejs010`.
+
 ## [2.6.0] - 2017-09-27
 
 ### Fixed
