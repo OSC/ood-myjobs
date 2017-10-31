@@ -40,22 +40,26 @@ class Configuration
     end
 
     # Id describing the OnDemand portal
-    # @return [String, nil] portal id
+    # @return [String] portal id
     def portal
-      config[:portal].try(:to_s) || ENV["OOD_PORTAL"]
+      config[:portal].try(:to_s) || ENV["OOD_PORTAL"] || "ondemand"
     end
 
     # Path to the data root for this app
-    # @return [String] data root
+    # @return [Pathname] data root
     def dataroot
-      config[:dataroot].try(:to_s) || ENV["OOD_DATAROOT"] ||
-        ( ENV["RAILS_ENV"] == "production" ? "#{ENV["HOME"]}/#{portal}/data/sys/myjobs" : "./data" )
+      Pathname.new(
+        config[:dataroot].try(:to_s) || ENV["OOD_DATAROOT"] ||
+          ( ENV["RAILS_ENV"] == "production" ? "~/#{portal}/data/sys/myjobs" : "./data" )
+      ).expand_path
     end
 
     # Path to the production database file for this app
-    # @return [String] database path
+    # @return [Pathname] database path
     def prod_database
-      config[:database].try(:to_s) || ENV["DATABASE_PATH"] || "#{dataroot}/production.sqlite3"
+      Pathname.new(
+        config[:database].try(:to_s) || ENV["DATABASE_PATH"] || dataroot.join("production.sqlite3")
+      )
     end
 
     # Title of Dashboard app
@@ -69,6 +73,6 @@ end
 # Set some environment variables to maintain backwards compatibility with
 # ood_appkit
 ENV["OOD_PORTAL"]          = Configuration.portal
-ENV["OOD_DATAROOT"]        = Configuration.dataroot
-ENV["DATABASE_PATH"]       = Configuration.prod_database
+ENV["OOD_DATAROOT"]        = Configuration.dataroot.to_s
+ENV["DATABASE_PATH"]       = Configuration.prod_database.to_s
 ENV["OOD_DASHBOARD_TITLE"] = Configuration.dashboard_title
