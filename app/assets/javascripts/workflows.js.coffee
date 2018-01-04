@@ -13,6 +13,7 @@ $(window).focus ->
 
 @request_job_data = (id) ->
   disable_all_buttons()
+  show_loading_button()
   if id?
     $.ajax
       type: 'GET'
@@ -42,8 +43,11 @@ $(window).focus ->
           update_copy_button()
         if missing_data_cluster()
           update_submit_button()
+      complete: ->
+        hide_loading_button()
   else
     show_job_panel()
+    hide_loading_button()
 
 @disable_all_buttons = ->
   update_job_details_panel()
@@ -56,6 +60,12 @@ $(window).focus ->
   update_copy_button()
   update_destroy_button()
   list_folder_contents()
+
+@hide_loading_button = ->
+  $("#loading_button").invisible()
+
+@show_loading_button = ->
+  $("#loading_button").visible()
 
 @show_job_panel = (show) ->
   if show?

@@ -19,6 +19,14 @@
 //= require local_time
 //= require_tree .
 
+jQuery.fn.visible = function() {
+    return this.css('visibility', 'visible');
+};
+
+jQuery.fn.invisible = function() {
+    return this.css('visibility', 'hidden');
+};
+
 var active_var = function() {
     return active_row().attr('id');
 };
