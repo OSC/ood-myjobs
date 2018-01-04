@@ -12,6 +12,7 @@ $(window).focus ->
   update_destroy_button(id)
 
 @request_job_data = (id) ->
+  disable_all_buttons()
   if id?
     $.ajax
       type: 'GET'
@@ -43,7 +44,6 @@ $(window).focus ->
           update_submit_button()
   else
     show_job_panel()
-    disable_all_buttons()
 
 @disable_all_buttons = ->
   update_job_details_panel()
