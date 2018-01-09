@@ -50,7 +50,6 @@ $(window).focus ->
     hide_loading_button()
 
 @disable_all_buttons = ->
-  update_job_details_panel()
   update_open_dir_button()
   update_edit_button()
   update_terminal_button()

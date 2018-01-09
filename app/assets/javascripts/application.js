@@ -74,6 +74,7 @@ $(document).ready(function(){
                 table.$('tr.active').removeClass('active');
                 $(this).addClass('active');
             }
+            update_job_details_panel();
             update_display(active_var());
         });
     }
