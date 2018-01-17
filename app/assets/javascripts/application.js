@@ -60,6 +60,7 @@ $(document).ready(function(){
 
     if ($('#job-list-table').length) {
         table = $('#job-list-table').DataTable();
+
         if (($('.job-row').length == 0)) {
             update_display();
             start_joyride();
