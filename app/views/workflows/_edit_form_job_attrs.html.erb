@@ -5,3 +5,7 @@
 API at: https://github.com/bootstrap-ruby/rails-bootstrap-forms %>
 
 <%= f.text_field :account, help: "Account is optional field. If not set, the account may be auto-set by the submit filter." if Configuration.show_job_options_account_field? %>
+
+<%= f.text_field :email, help: "Your email address" %>
+<%= f.check_box :email_on_started, help: "Receive an email when this job starts" %>
+<%= f.select :queue_name, [["Serial", "batch"], ["Debug", "debug"], ["Parallel", "parallel"]] %>

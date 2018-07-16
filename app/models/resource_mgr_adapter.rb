@@ -4,6 +4,11 @@
 # OodJob errors will be caught and re-raised as PBS::Error objects
 class ResourceMgrAdapter
 
+  attr_reader :workflow
+
+  def initialize(workflow)
+    @workflow = workflow
+  end
 
   # TODO: this adapter could ignore the host argument and use the one that is
   # specified when it is instantiated.
@@ -23,7 +28,13 @@ class ResourceMgrAdapter
     raise OSC::Machete::Job::ScriptMissingError, "#{script_path} does not exist or cannot be read" unless script_path.file? && script_path.readable?
 
     cluster = cluster_for_host_id(host)
-    script = OodCore::Job::Script.new(content: script_path.read, accounting_id: account_string)
+    script = OodCore::Job::Script.new(
+      content: script_path.read,
+      accounting_id: account_string,
+      queue_name: workflow.queue_name,
+      email: workflow.email.presence,
+      email_on_started: workflow.email_on_started.present?
+    )
     adapter(cluster).submit( script, **depends_on)
 
   rescue OodCore::JobAdapterError => e
