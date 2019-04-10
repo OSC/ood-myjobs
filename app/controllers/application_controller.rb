@@ -9,5 +9,11 @@ class ApplicationController < ActionController::Base
     I18n.locale = ::Configuration.locale
   rescue I18n::InvalidLocale => e
     logger.warn "I18n::InvalidLocale #{::Configuration.locale}: #{e.message}"
+  rescue NoMethodError => e
+    if ! ::Configuration.locales_root.exist?
+      logger.warn "I18n failure: configured locale root #{::Configuration.locales_root} does not exist"
+    else
+      raise e
+    end
   end
 end
