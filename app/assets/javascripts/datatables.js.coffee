@@ -11,7 +11,7 @@ jQuery ->
       orderable: false
       targets: 'no-sort'
     },
-    { "width": "50%", "targets": 1 }]
+    { "width": "30%", "targets": 1 }]
     iDisplayLength: 25
 
 jQuery ->
@@ -23,7 +23,7 @@ jQuery ->
       orderable: false
       targets: 'no-sort'
     },
-    { "width": "50%", "targets": 0 }]
+    { "width": "30%", "targets": 0 }]
     iDisplayLength: 10
 
 jQuery ->
