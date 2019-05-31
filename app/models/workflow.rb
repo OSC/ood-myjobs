@@ -60,6 +60,30 @@ class Workflow < ActiveRecord::Base
     workflow
   end
 
+  # Create a new workflow from a path and attempt to load a manifest on that path. Without copying
+  #
+  # @param [String] path A path to use as a non-static template
+  # @return [Workflow] Return a new workflow based on the path
+  def self.new_from_path_no_copy(path)
+    path = Pathname.new(path).expand_path rescue Pathname.new(path)
+    workflow = Workflow.new
+    workflow.name = ''
+    workflow.batch_host = OODClusters.first.id
+    workflow.script_name = ''
+    workflow.staging_template_dir = path.to_s
+    workflow.staged_dir = path
+
+    # Attempt to load a manifest on the path, there might be one
+    manifest_path = path.join('manifest.yml')
+    if manifest_path.exist?
+      manifest = Manifest.load manifest_path
+      workflow.name = manifest.name
+      workflow.batch_host = manifest.host
+      workflow.script_name = manifest.script
+    end
+    workflow
+  end
+
   # Override of osc_machete_rails
   # places jobs into the 'projects/default' folder
   def staging_target_dir_name
