@@ -113,8 +113,6 @@ class WorkflowsController < ApplicationController
   # POST /workflows/create_from_path_no_copy
   # POST /workflows/create_from_path_no_copy.json
   def create_from_path_no_copy
-    p workflow_params
-
     @workflow = Workflow.new_from_path_no_copy(workflow_params[:staging_template_dir])
     @workflow.name = workflow_params[:name] unless workflow_params[:name].blank?
     @workflow.batch_host = workflow_params[:batch_host] unless workflow_params[:batch_host].blank?
