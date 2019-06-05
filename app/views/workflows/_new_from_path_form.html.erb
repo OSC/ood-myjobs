@@ -8,7 +8,9 @@
         Path to source <strong>(Required)</strong>
       </div>
       <div class="panel-body">
-        <%= f.text_field :staging_template_dir, label: "Source path", required: true, help: "Enter the path to a directory on the file system. The contents of this path will be copied to a new workflow." %>
+        <%= f.text_field :staging_template_dir, label: "Source path", required: true, help: "Enter the path to a directory on the file system." %>
+
+        <%= f.check_box :should_not_copy, label: "Do not copy this path to the workflow directory: #{workflow.staging_target_dir.to_s}" %>
       </div>
     </div>
 
