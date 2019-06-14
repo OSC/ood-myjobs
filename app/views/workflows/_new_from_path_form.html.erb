@@ -12,7 +12,7 @@
 
         <div class="form-group">
           <label class="control-label" for="workflow_name">Copy directory to the workflow directory?</label>
-          <%= check_box :copy, 'dir', checked_value: 1, unchecked_value: 0, checked: true %>
+          <%= check_box_tag :copy, 1, options: {:checked => true} %>
           <span class="help-block">Unchecking will run this job in-place which is ideal when the directory is multiple gigabytes or contains 1ks of files.</span>
         </div>
       </div>

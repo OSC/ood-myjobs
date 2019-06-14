@@ -86,7 +86,7 @@ class WorkflowsController < ApplicationController
     @workflow.script_name = workflow_params[:script_name] unless workflow_params[:script_name].blank?
     @workflow.account = workflow_params[:account] unless workflow_params[:account].blank?
 
-    if workflow_params[:copy] == 1
+    if copy?
       # validate path we are copying from. copy_safe is a boolean, error contains the error string if false
       copy_safe, error = Filesystem.new.validate_path_is_copy_safe(@workflow.staging_template_dir.to_s)
       @workflow.errors.add(:staging_template_dir, error) unless copy_safe
@@ -222,11 +222,11 @@ class WorkflowsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def workflow_params
-      params.require(:copy)
-
-      params[:workflow][:copy] = params.dig(:copy, :dir).to_i
-
       params.require(:workflow).permit!
+    end
+
+    def copy?
+      params[:copy].to_i == 1
     end
 
     def update_jobs
