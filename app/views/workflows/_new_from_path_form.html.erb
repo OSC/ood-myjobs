@@ -10,7 +10,11 @@
       <div class="panel-body">
         <%= f.text_field :staging_template_dir, label: "Source path", required: true, help: "Enter the path to a directory on the file system." %>
 
-        <%= f.check_box :should_not_copy, label: "Do not copy this path to the workflow directory: #{workflow.staging_target_dir.to_s}" %>
+        <div class="form-group">
+          <label class="control-label" for="workflow_name">Copy directory to the workflow directory?</label>
+          <%= check_box :copy, 'dir', checked_value: 1, unchecked_value: 0, checked: true %>
+          <span class="help-block">Unchecking will run this job in-place which is ideal when the directory contains multi-gigabyte files or 1ks of files.</span>
+        </div>
       </div>
     </div>
 
