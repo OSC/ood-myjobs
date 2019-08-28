@@ -30,7 +30,6 @@ module JobConstructor
       p 'Building the database'
       require 'rake'
       FileUtils.chdir ::Configuration.dataroot.parent do
-        # Rake::Task.clear
         load_tasks
         ::Configuration.production_database_path.parent.mkpath
         Rake::Task['db:setup'].invoke
